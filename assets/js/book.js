@@ -1,4 +1,5 @@
 function Book(title, author, pages, read) {
+  this.id = Book.prototype.uniqueId;
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -15,6 +16,11 @@ function Book(title, author, pages, read) {
               <td>${this.author}</td>
               <td>${this.pages}</td>
               <td>${this.read}</td>
+              <td><button type="button" onclick="toggleRead(${this.id})">Read</button></td>
+              <td><button type="button" onclick="removeBook(${this.id})">Remove</button></td>
            `
   }
+  Book.prototype.uniqueId++;
 }
+
+Book.prototype.uniqueId = 1;

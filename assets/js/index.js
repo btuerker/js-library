@@ -21,6 +21,13 @@ function addBookToLibrary() {
 function addBookToShelf(book) {
   const table = document.getElementById("library-body");
   const newRow = table.insertRow(table.rows.length);
+  newRow.setAttribute("id", "book-" + book.id);
   newRow.innerHTML = book.render();
 }
 
+function removeBook(id) {
+  const book = library.find( (e) => e.id == id );
+  library.splice(library.indexOf(book), 1);
+  const table = document.getElementById("library-body");
+  table.removeChild(document.getElementById("book-" + book.id));
+}
