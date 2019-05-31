@@ -5,28 +5,25 @@
     <meta name="viewport" content="width=device-width">
     <title></title>
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/slider.css">
   </head>
   <body>
-    <button type="button" onclick="newBookForm()">New Book</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Pages</th>
-          <th>Read?</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="library-body">
-        <tr>
-          <td>Title 1</td>
-          <td>Author 1</td>
-          <td>Pages 1</td>
-          <td>true</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container">
+      <button class="new-book" type="button" onclick="newBookForm()">New Book</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read?</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="library-body">
+        </tbody>
+      </table>
+    </div>
     <script src="./assets/js/sweetalert.min.js"></script>
     <script src="./assets/js/book.js"></script>
     <script src="./assets/js/index.js"></script>
