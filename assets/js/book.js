@@ -10,13 +10,21 @@ function Book(title, author, pages, read) {
            " pages: " + this.pages + " read: " + this.read;
   }
 
+  this.toggleRead = function() {
+    this.read = !this.read;
+  }
+
   this.render = function() {
     return `
               <td>${this.title}</td>
               <td>${this.author}</td>
               <td>${this.pages}</td>
-              <td>${this.read}</td>
-              <td><button type="button" onclick="toggleRead(${this.id})">Read</button></td>
+              <td>
+               <label onclick="toggleRead(${this.id})" class="switch">
+                  <input type="checkbox" ${(this.read == true) ? 'checked' : null}>
+                  <span class="slider round"></span>
+                </label>
+              </td>
               <td><button type="button" onclick="removeBook(${this.id})">Remove</button></td>
            `
   }

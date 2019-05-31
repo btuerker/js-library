@@ -7,24 +7,7 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
   </head>
   <body>
-    <form id="book-form">
-      <label for="title">Title:</label>
-      <input id="title" type="text">
-
-      <label for="author">Author:</label>
-      <input id="author" type="text">
-
-      <label for="pages">Pages:</label>
-      <input id="pages" type="text">
-
-      <label for="read">Read?</label>
-      <input id="read" type="checkbox">
-
-      <button type="button" onclick="addBookToLibrary()">Save to Library</button>
-    </form>
-
-    <br>
-
+    <button type="button" onclick="newBookForm()">New Book</button>
     <table>
       <thead>
         <tr>
@@ -44,6 +27,7 @@
         </tr>
       </tbody>
     </table>
+    <script src="./assets/js/sweetalert.min.js"></script>
     <script src="./assets/js/book.js"></script>
     <script src="./assets/js/index.js"></script>
   </body>
