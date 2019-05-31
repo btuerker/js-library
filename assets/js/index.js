@@ -1,5 +1,8 @@
-// alert("Hello, Wordl!");
 let library = setupLibrary();
+
+if (!localStorage.uniqueId) {
+  localStorage.uniqueId = 1; 
+}
 
 function setupLibrary() {
   let library;
@@ -33,11 +36,28 @@ function addBookToShelf(book) {
 }
 
 function removeBook(id) {
-  const book = library.find( (e) => e.id == id );
-  library.splice(library.indexOf(book), 1);
-  updateLocalStorage("library", library);
-  const table = document.getElementById("library-body");
-  table.removeChild(document.getElementById("book-" + book.id));
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.value) {
+      const book = library.find( (e) => e.id == id );
+      library.splice(library.indexOf(book), 1);
+      updateLocalStorage("library", library);
+      const table = document.getElementById("library-body");
+      table.removeChild(document.getElementById("book-" + book.id));
+      Swal.fire(
+        'Deleted!',
+        'Your book has been deleted.',
+        'success'
+      )
+    }
+  })
 }
 
 function newBookForm() {
@@ -54,18 +74,13 @@ function newBookForm() {
     confirmButtonText: 'Add Book',
     preConfirm: () => {
       addBookToLibrary();
-      console.log("inside confirm");
-      // return [
-        // document.getElementById('swal-input1').value,
-        // document.getElementById('swal-input2').value
-      // ]
     }
   });
 }
 
 function toggleRead(id) {
   const book = library.find( (e) => e.id == id );
-  book.toggleRead();
+  library[library.indexOf(book)].toggleRead();
   updateLocalStorage("library", library);
 }
 

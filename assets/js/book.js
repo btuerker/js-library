@@ -1,5 +1,5 @@
 function Book(title, author, pages, read) {
-  this.id = Book.prototype.uniqueId;
+  this.id = localStorage.uniqueId;
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -20,15 +20,13 @@ function Book(title, author, pages, read) {
               <td>${this.author}</td>
               <td>${this.pages}</td>
               <td>
-               <label onclick="toggleRead(${this.id})" class="switch">
-                  <input type="checkbox" ${(this.read == true) ? 'checked' : null}>
+               <label class="switch">
+                  <input onchange="toggleRead(${this.id})" type="checkbox" ${(this.read == true) ? 'checked' : null}>
                   <span class="slider round"></span>
                 </label>
               </td>
               <td><button type="button" onclick="removeBook(${this.id})">Remove</button></td>
            `
   }
-  Book.prototype.uniqueId++;
+  localStorage.uniqueId++;
 }
-
-Book.prototype.uniqueId = 1;
