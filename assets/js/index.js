@@ -1,8 +1,15 @@
 // alert("Hello, Wordl!");
-let library = [];
+let library = setupLibrary();
 
-// var book = new Book("Eloquent Javascript", "Marjin Haverbeke", 450, false);
-// console.log(book.info());
+function setupLibrary() {
+  let library;
+  if(localStorage.library) {
+    library = JSON.parse(localStorage.library).map((e) => Object.assign(new Book(), e));
+  } else {
+    library = [];
+  }
+  return library;
+}
 
 function addBookToLibrary() {
   const form   = document.getElementById("book-form");
@@ -14,6 +21,7 @@ function addBookToLibrary() {
 
   const book = new Book(title, author, pages, read);
   library.push(book);
+  updateLocalStorage("library", library);
   addBookToShelf(book);
 }
 
@@ -27,6 +35,7 @@ function addBookToShelf(book) {
 function removeBook(id) {
   const book = library.find( (e) => e.id == id );
   library.splice(library.indexOf(book), 1);
+  updateLocalStorage("library", library);
   const table = document.getElementById("library-body");
   table.removeChild(document.getElementById("book-" + book.id));
 }
@@ -57,5 +66,17 @@ function newBookForm() {
 function toggleRead(id) {
   const book = library.find( (e) => e.id == id );
   book.toggleRead();
+  updateLocalStorage("library", library);
 }
+
+function updateLocalStorage(key, value) {
+  localStorage[key] = JSON.stringify(value);
+}
+
+function init() {
+  library.forEach((e) => addBookToShelf(e));
+}
+
+
+init();
 
