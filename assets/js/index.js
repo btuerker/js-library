@@ -1,18 +1,26 @@
 // alert("Hello, Wordl!");
-let library = [
-  { title: "", author: "", read: true }
-];
+let library = [];
 
 // var book = new Book("Eloquent Javascript", "Marjin Haverbeke", 450, false);
 // console.log(book.info());
 
 function addBookToLibrary() {
-  let title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
-  let read = document.getElementById("read").checked;
+  const form   = document.getElementById("book-form");
 
-  let book = new Book(title, author, pages, read);
+  const title  = form.elements["title"].value;
+  const author = form.elements["author"].value;
+  const pages  = form.elements["pages"].value;
+  const read   = form.elements["read"].checked;
+
+  const book = new Book(title, author, pages, read);
   library.push(book);
-  alert();
+  addBookToShelf(book);
+  form.reset();
 }
+
+function addBookToShelf(book) {
+  const table = document.getElementById("library-body");
+  const newRow = table.insertRow(table.rows.length);
+  newRow.innerHTML = book.render();
+}
+
