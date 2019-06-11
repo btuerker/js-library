@@ -5,53 +5,53 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 
-    this.toggleRead = function() {
-        this.read = !this.read;
-    }
-
     localStorage.uniqueId++;
 }
 
-Book.prototype.info = function(book) {
-    return "title: " + book.title + " author: " + book.author +
-    " pages: " + book.pages + " read: " + book.read;
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
 }
 
-Book.prototype.render = function(book) {
+Book.prototype.info = function() {
+    return "title: " + this.title + " author: " + this.author +
+    " pages: " + this.pages + " read: " + this.read;
+}
+
+Book.prototype.render = function() {
       return `
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.pages}</td>
+                <td>${this.title}</td>
+                <td>${this.author}</td>
+                <td>${this.pages}</td>
                 <td>
                  <label class="switch">
-                    <input onchange="toggleRead(${book.id})" type="checkbox" ${(book.read == true) ? 'checked' : null}>
+                    <input onchange="toggleRead(${this.id})" type="checkbox" ${(this.read == true) ? 'checked' : null}>
                     <span class="slider round"></span>
                   </label>
                 </td>
-                <td><button type="button" onclick="removeBook(${book.id})">Remove</button></td>
+                <td><button type="button" onclick="removeBook(${this.id})">Remove</button></td>
              `
 }
 
-// Book.prototype.render = function(book) {
+// Book.prototype.render = function() {
 //     let row = document.createElement("tr");
-//     row.setAttribute("id", "book-" + book.id);
+//     row.setAttribute("id", "book-" + this.id);
 //
 //     let title = document.createElement("td");
-//     title.innerHTML = book.title;
+//     title.innerHTML = this.title;
 //
 //     let author = document.createElement("td");
-//     author.innerHTML = book.author;
+//     author.innerHTML = this.author;
 //
 //     let pages = document.createElement("td");
-//     pages.innerHTML = book.pages;
+//     pages.innerHTML = this.pages;
 //
 //     let read = document.createElement("td");
 //     let readLabel = document.createElement("label");
 //     readLabel.setAttribute("class", "switch");
 //     let readInput = document.createElement("input");
 //     readInput.setAttribute("type", "checkbox");
-//     readInput.setAttribute("onchange", "toggleRead(" + book.id + ")");
-//     if (book.read) {
+//     readInput.setAttribute("onchange", "toggleRead(" + this.id + ")");
+//     if (this.read) {
 //         readInput.setAttribute("checked", "checked");
 //     }
 //     let readSpan = document.createElement("span");
@@ -64,7 +64,7 @@ Book.prototype.render = function(book) {
 //     let delButton = document.createElement("button");
 //     delButton.innerHTML = "Remove";
 //     delButton.setAttribute("type", "button");
-//     delButton.setAttribute("onclick", "removeBook(" + book.id + ")");
+//     delButton.setAttribute("onclick", "removeBook(" + this.id + ")");
 //     del.appendChild(delButton);
 //
 //     row.appendChild(title);

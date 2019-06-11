@@ -20,15 +20,14 @@ function addBookToLibrary() {
     const book = new Book(title, author, pages, read);
     library.push(book);
     updateLocalStorage("library", library);
-    addBookToShelf(book);
+    displayBook(book);
 }
 
-function addBookToShelf(book) {
+function displayBook(book) {
     const table = document.getElementById("library-body");
     const newBook = document.createElement("tr");
     newBook.setAttribute("id", "book-" + book.id);
-    newBook.innerHTML = Book.prototype.render(book);
-    // const newBook = Book.prototype.render(book);
+    newBook.innerHTML = book.render();
     table.appendChild(newBook);
 }
 
@@ -86,7 +85,7 @@ function updateLocalStorage(key, value) {
 }
 
 function init() {
-    library.forEach((book) => addBookToShelf(book));
+    library.forEach((book) => displayBook(book));
 }
 
 
